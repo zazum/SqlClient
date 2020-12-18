@@ -3,13 +3,14 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Data.SqlClient;
 using System.Reflection;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests.SystemDataInternals
 {
     internal static class TdsParserStateObjectHelper
     {
-        private static Assembly s_systemDotData = typeof(Microsoft.Data.SqlClient.SqlConnection).GetTypeInfo().Assembly;
+        private static Assembly s_systemDotData = typeof(SqlConnection).GetTypeInfo().Assembly;
         private static Type s_tdsParserStateObject = s_systemDotData.GetType("Microsoft.Data.SqlClient.TdsParserStateObject");
         private static Type s_tdsParserStateObjectNative = s_systemDotData.GetType("Microsoft.Data.SqlClient.TdsParserStateObjectNative");
         private static FieldInfo s_forceAllPends = s_tdsParserStateObject.GetField("_forceAllPends", BindingFlags.Static | BindingFlags.NonPublic);

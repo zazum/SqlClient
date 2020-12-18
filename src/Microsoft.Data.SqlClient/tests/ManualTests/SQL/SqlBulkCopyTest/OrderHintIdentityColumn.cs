@@ -4,6 +4,7 @@
 
 using System;
 using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 {
@@ -40,7 +41,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                             // no mapping
                             using (DbDataReader reader = srcCmd.ExecuteReader())
                             {
-                                bulkcopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
+                               // bulkcopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
                                 bulkcopy.WriteToServer(reader);
                                 Helpers.VerifyResults(dstConn, dstTable, 3, nRowsInSource);
                             }

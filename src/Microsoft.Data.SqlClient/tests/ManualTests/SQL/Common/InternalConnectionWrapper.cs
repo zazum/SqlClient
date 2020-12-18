@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Reflection;
 using System.Threading;
 using Microsoft.Data.SqlClient.ManualTesting.Tests.SystemDataInternals;
@@ -162,7 +163,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                 try
                 {
                     s_killByTSqlConnectionStringsLock.EnterWriteLock();
-                    s_killByTSqlConnectionStrings.TryAdd(ConnectionString, killConnectionString);
+                    s_killByTSqlConnectionStrings.Add(ConnectionString, killConnectionString);
                 }
                 finally
                 {

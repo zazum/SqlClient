@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Data.SqlClient;
 using System.Reflection;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
@@ -20,7 +21,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                 return s_instance;
             }
         }
-        private SystemDataResourceManager() : base(typeof(Microsoft.Data.SqlClient.SqlConnection).GetTypeInfo().Assembly)
+        private SystemDataResourceManager() : base(typeof(SqlConnection).GetTypeInfo().Assembly)
         {
         }
     }

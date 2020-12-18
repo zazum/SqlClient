@@ -5,6 +5,7 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using Xunit;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
@@ -57,7 +58,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                             // hint for 1 of 3 columns
                             using (DbDataReader reader = srcCmd.ExecuteReader())
                             {
-                                bulkCopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
+                                //bulkCopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
                                 bulkCopy.WriteToServer(reader);
                             }
 
@@ -65,8 +66,8 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                             // order of hints is not the same as column order in table
                             using (DbDataReader reader = srcCmd.ExecuteReader())
                             {
-                                bulkCopy.ColumnOrderHints.Add("ContactName", SortOrder.Descending);
-                                bulkCopy.ColumnOrderHints.Add("CompanyName", SortOrder.Ascending);
+                                //bulkCopy.ColumnOrderHints.Add("ContactName", SortOrder.Descending);
+                                //bulkCopy.ColumnOrderHints.Add("CompanyName", SortOrder.Ascending);
                                 bulkCopy.WriteToServer(reader);
                             }
 
@@ -107,15 +108,15 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 
                         // add copy options
                         SqlBulkCopyOptions copyOptions =
-                            SqlBulkCopyOptions.AllowEncryptedValueModifications |
+                            //SqlBulkCopyOptions.AllowEncryptedValueModifications |
                             SqlBulkCopyOptions.FireTriggers |
                             SqlBulkCopyOptions.KeepNulls;
                         using (SqlBulkCopy bulkcopy = new SqlBulkCopy(dstConn, copyOptions, null))
                         {
                             bulkcopy.DestinationTableName = dstTable;
-                            bulkcopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
-                            bulkcopy.ColumnOrderHints.Add("CompanyName", SortOrder.Ascending);
-                            bulkcopy.ColumnOrderHints.Add("ContactName", SortOrder.Descending);
+                            //bulkcopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
+                            //bulkcopy.ColumnOrderHints.Add("CompanyName", SortOrder.Ascending);
+                            //bulkcopy.ColumnOrderHints.Add("ContactName", SortOrder.Descending);
                             using (DbDataReader reader = srcCmd.ExecuteReader())
                             {
                                 bulkcopy.WriteToServer(reader);
@@ -129,8 +130,8 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                             using (DbDataReader reader = srcCmd.ExecuteReader())
                             {
                                 bulkcopy.DestinationTableName = dstTable2;
-                                bulkcopy.ColumnOrderHints.Clear();
-                                bulkcopy.ColumnOrderHints.Add("LastName", SortOrder.Descending);
+                                //bulkcopy.ColumnOrderHints.Clear();
+                                //bulkcopy.ColumnOrderHints.Add("LastName", SortOrder.Descending);
                                 bulkcopy.WriteToServer(reader);
                                 Helpers.VerifyResults(dstConn, dstTable2, 2, nRowsInSource2);
                             }

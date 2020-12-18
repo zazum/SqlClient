@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 {
@@ -39,8 +40,8 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                                 bulkcopy.DestinationTableName = dstTable;
                                 bulkcopy.ColumnMappings.Add(0, 2);
                                 bulkcopy.ColumnMappings.Add(2, 0);
-                                bulkcopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
-                                bulkcopy.ColumnOrderHints.Add("ContactName", SortOrder.Descending);
+                                //bulkcopy.ColumnOrderHints.Add("CustomerID", SortOrder.Ascending);
+                                //bulkcopy.ColumnOrderHints.Add("ContactName", SortOrder.Descending);
                                 bulkcopy.WriteToServer(reader);
                             }
                             finally

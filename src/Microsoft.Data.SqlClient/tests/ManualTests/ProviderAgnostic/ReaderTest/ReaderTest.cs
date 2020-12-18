@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.IO;
 using System.Text;
 using Xunit;

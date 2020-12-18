@@ -15,8 +15,9 @@ using System.Threading;
 using System.Globalization;
 using System.Threading.Tasks;
 using System.Transactions;
-using Microsoft.Data.SqlClient.Server;
 using Xunit;
+using Microsoft.SqlServer.Server;
+using System.Data.SqlClient;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 {

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using Xunit;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests

@@ -3,7 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Data;
-using Microsoft.Data.SqlClient.Server;
+using System.Data.SqlClient;
+using Microsoft.SqlServer.Server;
 using Xunit;
 
 namespace Microsoft.Data.SqlClient.Tests

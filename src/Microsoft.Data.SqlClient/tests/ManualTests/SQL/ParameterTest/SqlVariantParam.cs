@@ -4,8 +4,9 @@
 
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
-using Microsoft.Data.SqlClient.Server;
+using Microsoft.SqlServer.Server;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 {

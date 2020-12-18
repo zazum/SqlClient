@@ -4,6 +4,7 @@
 
 using System;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Reflection;
 using System.Security;
 using Xunit;

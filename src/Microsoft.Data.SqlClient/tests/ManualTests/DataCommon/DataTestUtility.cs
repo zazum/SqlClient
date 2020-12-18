@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics.Tracing;
 using System.Globalization;
@@ -12,8 +13,8 @@ using System.IO;
 using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Identity.Client;
 using Microsoft.Data.SqlClient.TestUtilities;
+using Microsoft.Identity.Client;
 using Xunit;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests

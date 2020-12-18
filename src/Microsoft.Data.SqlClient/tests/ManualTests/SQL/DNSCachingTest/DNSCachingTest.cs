@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Reflection;
 using Xunit;
@@ -19,25 +20,25 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
         public static MethodInfo SQLFallbackDNSCacheGetDNSInfo = SQLFallbackDNSCacheType.GetMethod("GetDNSInfo", BindingFlags.Instance | BindingFlags.NonPublic);
         
         
-        [ConditionalFact(typeof(DataTestUtility), nameof(DataTestUtility.IsDNSCachingSetup))]
-        public void DNSCachingIsSupportedFlag()
-        {
-            string expectedDNSCachingSupportedCR = DataTestUtility.IsDNSCachingSupportedCR ? "true" : "false";
-            string expectedDNSCachingSupportedTR = DataTestUtility.IsDNSCachingSupportedTR ? "true" : "false";
+        //[ConditionalFact(typeof(DataTestUtility), nameof(DataTestUtility.IsDNSCachingSetup))]
+        //public void DNSCachingIsSupportedFlag()
+        //{
+        //    string expectedDNSCachingSupportedCR = DataTestUtility.IsDNSCachingSupportedCR ? "true" : "false";
+        //    string expectedDNSCachingSupportedTR = DataTestUtility.IsDNSCachingSupportedTR ? "true" : "false";
 
-            using(SqlConnection connection = new SqlConnection(DataTestUtility.DNSCachingConnString))
-            {
-                connection.Open();
+        //    using(SqlConnection connection = new SqlConnection(DataTestUtility.DNSCachingConnString))
+        //    {
+        //        connection.Open();
 
-                IDictionary<string, object> dictionary = connection.RetrieveInternalInfo();
-                bool ret = dictionary.TryGetValue("SQLDNSCachingSupportedState", out object val);
-                ret = dictionary.TryGetValue("SQLDNSCachingSupportedStateBeforeRedirect", out object valBeforeRedirect);
-                string isSupportedStateTR = (string)val;
-                string isSupportedStateCR = (string)valBeforeRedirect;
-                Assert.Equal(expectedDNSCachingSupportedCR, isSupportedStateCR);
-                Assert.Equal(expectedDNSCachingSupportedTR, isSupportedStateTR);
-            }
-        }
+        //        IDictionary<string, object> dictionary = connection.RetrieveInternalInfo();
+        //        bool ret = dictionary.TryGetValue("SQLDNSCachingSupportedState", out object val);
+        //        ret = dictionary.TryGetValue("SQLDNSCachingSupportedStateBeforeRedirect", out object valBeforeRedirect);
+        //        string isSupportedStateTR = (string)val;
+        //        string isSupportedStateCR = (string)valBeforeRedirect;
+        //        Assert.Equal(expectedDNSCachingSupportedCR, isSupportedStateCR);
+        //        Assert.Equal(expectedDNSCachingSupportedTR, isSupportedStateTR);
+        //    }
+        //}
         
         [ConditionalFact(typeof(DataTestUtility), nameof(DataTestUtility.IsDNSCachingSetup))]
         public void DNSCachingGetDNSInfo()

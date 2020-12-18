@@ -18,6 +18,7 @@ using System.Runtime.CompilerServices;
 using System;
 using System.Data;
 using Microsoft.DotNet.RemoteExecutor;
+using System.Data.SqlClient;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 {

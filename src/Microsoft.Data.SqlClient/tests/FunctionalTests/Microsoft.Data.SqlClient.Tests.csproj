@@ -14,7 +14,7 @@
     <Compile Include="SqlConnectionStringBuilderPoolBlockingTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlwaysEncryptedTests\ExceptionsAlgorithmErrors.cs" />
+    <!-- <Compile Include="AlwaysEncryptedTests\ExceptionsAlgorithmErrors.cs" />
     <Compile Include="AlwaysEncryptedTests\ExceptionsCertStore.cs" />
     <Compile Include="AlwaysEncryptedTests\SqlColumnEncryptionCertificateStoreProviderShould.cs" />
     <Compile Include="AlwaysEncryptedTests\SqlColumnEncryptionCngProviderShould.cs" />
@@ -25,7 +25,7 @@
     <Compile Include="AlwaysEncryptedTests\SqlCommandShould.cs" />
     <Compile Include="AlwaysEncryptedTests\SqlConnectionShould.cs" />
     <Compile Include="AlwaysEncryptedTests\TestFixtures.cs" />
-    <Compile Include="AlwaysEncryptedTests\Utility.cs" />
+    <Compile Include="AlwaysEncryptedTests\Utility.cs" /> -->
     <Compile Include="SqlCommandBuilderTest.cs" />
     <Compile Include="SqlBulkCopyTest.cs" />
     <Compile Include="SqlClientMetaDataCollectionNamesTest.cs" />
@@ -33,7 +33,7 @@
     <Compile Include="SqlConnectionBasicTests.cs" />
     <Compile Include="SqlCommandTest.cs" />
     <Compile Include="SqlConnectionTest.cs" />
-    <Compile Include="AADAuthenticationTests.cs" />
+    <!-- <Compile Include="AADAuthenticationTests.cs" /> -->
     <Compile Include="CloneTests.cs" />
     <Compile Include="BaseProviderAsyncTest\BaseProviderAsyncTest.cs" />
     <Compile Include="BaseProviderAsyncTest\MockCommand.cs" />
@@ -42,12 +42,12 @@
     <Compile Include="SqlCredentialTest.cs" />
     <Compile Include="SqlDataRecordTest.cs" />
     <Compile Include="SqlExceptionTest.cs" />
-    <Compile Include="SqlFacetAttributeTest.cs" />
+    <!-- <Compile Include="SqlFacetAttributeTest.cs" /> -->
     <Compile Include="SqlParameterTest.cs" />
     <Compile Include="SqlClientFactoryTest.cs" />
     <Compile Include="SqlErrorCollectionTest.cs" />
     <Compile Include="SqlBulkCopyColumnMappingCollectionTest.cs" />
-    <Compile Include="SqlBulkCopyColumnOrderHintCollectionTest.cs" />
+    <!-- <Compile Include="SqlBulkCopyColumnOrderHintCollectionTest.cs" /> -->
     <Compile Include="AmbientTransactionFailureTest.cs" />
     <Compile Include="SqlConnectionTest.RetrieveStatistics.cs" />
     <Compile Include="SqlMetaDataTest.cs" />
@@ -60,6 +60,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(MicrosoftNETTestSdkVersion)" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="$(SystemDiagnosticsDiagnosticSourceVersion)" />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
     <Reference Condition="'$(TargetGroup)'=='netfx' OR '$(TargetFramework)'=='netcoreapp2.1'" Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
@@ -87,10 +88,8 @@
     <ProjectReference Include="$(TestsPath)tools\Microsoft.DotNet.XUnitExtensions\Microsoft.DotNet.XUnitExtensions.csproj">
       <Name>Microsoft.DotNet.XUnitExtensions</Name>
     </ProjectReference>
-    <ProjectReference Condition="'$(TargetGroup)'=='netcoreapp' AND $(ReferenceType)=='Project'" Include="$(NetCoreSource)src\Microsoft.Data.SqlClient.csproj" />
-    <ProjectReference Condition="'$(TargetGroup)'=='netfx' AND $(ReferenceType)=='Project'" Include="$(NetFxSource)src\Microsoft.Data.SqlClient.csproj" />
-    <ProjectReference Include="$(AddOnsPath)AzureKeyVaultProvider\Microsoft.Data.SqlClient.AlwaysEncrypted.AzureKeyVaultProvider.csproj" />
-    <ProjectReference Condition="$(ReferenceType.Contains('NetStandard'))" Include="$(TestsPath)NSLibrary\Microsoft.Data.SqlClient.NSLibrary.csproj" />
+    <!--<ProjectReference Condition="'$(TargetGroup)'=='netfx' AND $(ReferenceType)=='Project'" Include="$(NetFxSource)src\Microsoft.Data.SqlClient.csproj" />
+    <ProjectReference Condition="$(ReferenceType.Contains('NetStandard'))" Include="$(TestsPath)NSLibrary\Microsoft.Data.SqlClient.NSLibrary.csproj" />-->
     <PackageReference Condition="$(ReferenceType)=='Package'" Include="Microsoft.Data.SqlClient" Version="$(TestMicrosoftDataSqlClientVersion)" />
   </ItemGroup>
   <ItemGroup>

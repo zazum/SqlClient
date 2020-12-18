@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Data.SqlClient;
 using System.Net;
 using System.Runtime.CompilerServices;
 using Microsoft.SqlServer.TDS.EndPoint;

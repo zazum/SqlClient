@@ -5,6 +5,7 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.Diagnostics;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
@@ -1185,7 +1186,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
             ValidateReadType(typeof(DateTimeOffset), asType);
             if (reader.IsDBNull(ordinal))
                 return DBNull.Value;
-            return ((Microsoft.Data.SqlClient.SqlDataReader)reader).GetDateTimeOffset(ordinal);
+            return ((SqlDataReader)reader).GetDateTimeOffset(ordinal);
         }
 
         protected override bool CompareValuesInternal(SqlRandomTableColumn columnInfo, object expected, object actual)
@@ -1259,7 +1260,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
             ValidateReadType(typeof(TimeSpan), asType);
             if (reader.IsDBNull(ordinal))
                 return DBNull.Value;
-            return ((Microsoft.Data.SqlClient.SqlDataReader)reader).GetTimeSpan(ordinal);
+            return ((SqlDataReader)reader).GetTimeSpan(ordinal);
         }
 
         protected override bool CompareValuesInternal(SqlRandomTableColumn columnInfo, object expected, object actual)

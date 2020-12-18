@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Data.SqlClient;
 using Microsoft.Data.SqlClient.ManualTesting.Tests.SystemDataInternals;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
@@ -78,29 +79,29 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 
         public void Dispose()
         {
-            if (_reader != null)
-            {
-                if (_errorCode.HasValue)
-                {
-                    _reader.CompletePendingReadWithFailure(_errorCode.Value, true);
-                }
-                else
-                {
-                    _reader.CompletePendingReadWithSuccess(true);
-                }
-            }
+            //if (_reader != null)
+            //{
+            //    if (_errorCode.HasValue)
+            //    {
+            //        _reader.CompletePendingReadWithFailure(_errorCode.Value, true);
+            //    }
+            //    else
+            //    {
+            //        _reader.CompletePendingReadWithSuccess(true);
+            //    }
+            //}
 
-            if (_command != null)
-            {
-                if (_errorCode.HasValue)
-                {
-                    _command.CompletePendingReadWithFailure(_errorCode.Value, true);
-                }
-                else
-                {
-                    _command.CompletePendingReadWithSuccess(true);
-                }
-            }
+            //if (_command != null)
+            //{
+            //    if (_errorCode.HasValue)
+            //    {
+            //        _command.CompletePendingReadWithFailure(_errorCode.Value, true);
+            //    }
+            //    else
+            //    {
+            //        _command.CompletePendingReadWithSuccess(true);
+            //    }
+            //}
         }
     }
 }

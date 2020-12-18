@@ -4,6 +4,7 @@
 
 using System;
 using System.Data.Common;
+using System.Data.SqlClient;
 using Xunit;
 
 namespace Microsoft.Data.SqlClient.ManualTesting.Tests
@@ -40,7 +41,7 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
                                 const string destColumn = "ContactName";
 
                                 // column does not exist in destination table
-                                bulkcopy.ColumnOrderHints.Add(nonexistentColumn, SortOrder.Ascending);
+                                //bulkcopy.ColumnOrderHints.Add(nonexistentColumn, SortOrder.Ascending);
 
                                 string expectedErrorMsg = string.Format(
                                     SystemDataResourceManager.Instance.SQL_BulkLoadOrderHintInvalidColumn, nonexistentColumn);
@@ -50,9 +51,9 @@ namespace Microsoft.Data.SqlClient.ManualTesting.Tests
 
                                 // column does not exist in destination table because of user-defined mapping
                                 bulkcopy.ColumnMappings.Add(sourceColumn, destColumn);
-                                bulkcopy.ColumnOrderHints.RemoveAt(0);
-                                bulkcopy.ColumnOrderHints.Add(sourceColumn, SortOrder.Ascending);
-                                Assert.True(bulkcopy.ColumnOrderHints.Count == 1, "Error adding a column order hint");
+                                //bulkcopy.ColumnOrderHints.RemoveAt(0);
+                                //bulkcopy.ColumnOrderHints.Add(sourceColumn, SortOrder.Ascending);
+                                //Assert.True(bulkcopy.ColumnOrderHints.Count == 1, "Error adding a column order hint");
 
                                 expectedErrorMsg = string.Format(
                                     SystemDataResourceManager.Instance.SQL_BulkLoadOrderHintInvalidColumn, sourceColumn);

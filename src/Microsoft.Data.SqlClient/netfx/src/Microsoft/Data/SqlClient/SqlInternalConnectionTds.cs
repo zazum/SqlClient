@@ -146,6 +146,8 @@ namespace Microsoft.Data.SqlClient
         internal bool _cleanSQLDNSCaching = false;
         private bool _serverSupportsDNSCaching = false;
 
+        internal bool _requestForceRefresh = false;
+
         /// <summary>
         /// Returns buffer time allowed before access token expiry to continue using the access token.
         /// </summary>
@@ -539,6 +541,16 @@ namespace Microsoft.Data.SqlClient
                         }
                         catch (SqlException sqlex)
                         {
+                            foreach (SqlError error in sqlex.Errors)
+                            {
+                                // If server returns generic Error 40613, request force refresh feature extension in future connections
+                                // TODO: Narrow down error code for force refresh
+                                if (error.Number == 40613)
+                                { 
+                                    _requestForceRefresh = true;
+                                }
+                            }
+
                             if (i + 1 == connectionEstablishCount
                               || !applyTransientFaultHandling
                               || _timeout.IsExpired
@@ -1622,6 +1634,12 @@ namespace Microsoft.Data.SqlClient
             // The SQLDNSCaching feature is implicitly set
             requestedFeatures |= TdsEnums.FeatureExtension.SQLDNSCaching;
 
+            // The ForceRefresh feature is set if driver recieved 40613 Error
+            if (_requestForceRefresh)
+            {
+                requestedFeatures |= TdsEnums.FeatureExtension.ForceRefresh;
+            }
+            
             _parser.TdsLogin(login, requestedFeatures, _recoverySessionData, _fedAuthFeatureExtensionData, _originalNetworkAddressInfo);
         }
 
@@ -2925,7 +2943,7 @@ namespace Microsoft.Data.SqlClient
         {
             if (_routingInfo != null)
             {
-                if (TdsEnums.FEATUREEXT_SQLDNSCACHING != featureId)
+                if (TdsEnums.FEATUREEXT_SQLDNSCACHING != featureId && TdsEnums.FEATUREEXT_FORCEREFRESH != featureId)
                 {
                     return;
                 }
@@ -3177,6 +3195,29 @@ namespace Microsoft.Data.SqlClient
                         // not put them in the DNS cache at this point but need to store them somewhere
 
                         // generate pendingSQLDNSObject and turn on IsSQLDNSRetryEnabled flag
+
+                        break;
+                    }
+
+                case TdsEnums.FEATUREEXT_FORCEREFRESH:
+                    {
+                        SqlClientEventSource.Log.TryAdvancedTraceEvent("<sc.SqlInternalConnectionTds.OnFeatureExtAck|ADV> {0}, Received feature extension acknowledgement for FORCEREFRESH", ObjectID);
+
+                        if (data.Length < 1)
+                        {
+                            SqlClientEventSource.Log.TryTraceEvent("<sc.SqlInternalConnectionTds.OnFeatureExtAck|ERR> {0}, Unknown token for FORCEREFRESH", ObjectID);
+                            throw SQL.ParsingError(ParsingErrorState.CorruptedTdsStream);
+                        }
+
+                        // TODO: Add logic for when server acknowledges Force Refresh
+                        if (1 == data[0])
+                        {
+                            Console.WriteLine("FORCE REFRESH IS SUPPORTED");
+                        }
+                        else
+                        {
+                            Console.WriteLine("FORCE REFRESH IS NOT SUPPORTED");
+                        }
 
                         break;
                     }
